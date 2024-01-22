@@ -29,19 +29,19 @@ class _AddContactScreenState extends State<AddContactScreen> {
   bool isEmailValid = true;
 
   void addContact() {
-    setState(() {
-      // Reset validation status
-      isFirstNameValid = firstNameController.text.isNotEmpty;
-      isLastNameValid = lastNameController.text.isNotEmpty;
-      isPhoneNumberValid = phoneRegExp.hasMatch(phoneNumberController.text);
-      isAddressValid = addressController.text.isNotEmpty;
-      isEmailValid = emailRegExp.hasMatch(emailController.text);
+    // Reset validation status
+    isFirstNameValid = firstNameController.text.isNotEmpty;
+    isLastNameValid = lastNameController.text.isNotEmpty;
+    isPhoneNumberValid = phoneRegExp.hasMatch(phoneNumberController.text);
+    isAddressValid = addressController.text.isNotEmpty;
+    isEmailValid = emailRegExp.hasMatch(emailController.text);
 
-      if (isFirstNameValid &&
-          isLastNameValid &&
-          isPhoneNumberValid &&
-          isAddressValid &&
-          isEmailValid) {
+    if (isFirstNameValid &&
+        isLastNameValid &&
+        isPhoneNumberValid &&
+        isAddressValid &&
+        isEmailValid) {
+      setState(() {
         widget.contacts.add(Contact(
           firstName: firstNameController.text,
           lastName: lastNameController.text,
@@ -50,8 +50,8 @@ class _AddContactScreenState extends State<AddContactScreen> {
           email: emailController.text,
         ));
         Navigator.pop(context, widget.contacts);
-      }
-    });
+      });
+    }
   }
 
   @override
@@ -80,7 +80,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   'Please enter a valid first name.',
                   style: TextStyle(color: Colors.red),
                 ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Last Name',
                 style: TextStyle(color: Colors.grey[500]),
@@ -94,21 +94,28 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   'Please enter a valid last name.',
                   style: TextStyle(color: Colors.red),
                 ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Phone Number',
                 style: TextStyle(color: Colors.grey[500]),
               ),
               TextField(
                 controller: phoneNumberController,
-                decoration: const InputDecoration(prefix: Text('+63', style: TextStyle(fontSize: 13),), border: OutlineInputBorder(), labelText: '+63xxxxxxxxxx',),
+                decoration: const InputDecoration(
+                  prefix: Text(
+                    '+63',
+                    style: TextStyle(fontSize: 13),
+                  ),
+                  border: OutlineInputBorder(),
+                  labelText: '+63xxxxxxxxxx',
+                ),
               ),
               if (!isPhoneNumberValid)
                 const Text(
                   'Please enter a valid phone number.',
                   style: TextStyle(color: Colors.red),
                 ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Address',
                 style: TextStyle(color: Colors.grey[500]),
@@ -122,21 +129,22 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   'Please enter a valid address.',
                   style: TextStyle(color: Colors.red),
                 ),
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Email',
                 style: TextStyle(color: Colors.grey[500]),
               ),
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'e.g. judy@gmail.com', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                    labelText: 'e.g. judy@gmail.com',
+                    border: OutlineInputBorder()),
               ),
               if (!isEmailValid)
                 const Text(
                   'Please enter a valid email address.',
                   style: TextStyle(color: Colors.red),
                 ),
-
               const SizedBox(height: 15),
               ElevatedButton(
                 onPressed: () {
